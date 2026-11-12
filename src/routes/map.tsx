@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import maplibregl from "maplibre-gl";
+import * as maplibregl from "maplibre-gl";
+import { configureMaplibre } from "@/lib/maplibre-setup";
 import {
   Layers,
   Locate,
@@ -85,6 +86,7 @@ function MapPage() {
   // Init map
   useEffect(() => {
     if (!container.current || mapRef.current) return;
+    configureMaplibre();
     const map = new maplibregl.Map({
       container: container.current,
       style: STYLES.satellite,
@@ -145,8 +147,8 @@ function MapPage() {
       });
     };
 
-    if (map.isStyleLoaded()) paint();
-    else map.once("styledata", paint);
+    // Markers are plain DOM elements, so they do not need the map style to be loaded.
+    paint();
     map.on("styledata", paint);
     return () => {
       map.off("styledata", paint);

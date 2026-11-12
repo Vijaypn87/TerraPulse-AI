@@ -1,11 +1,14 @@
 import { useEffect, useRef } from "react";
-import maplibregl from "maplibre-gl";
+import * as maplibregl from "maplibre-gl";
+import { configureMaplibre } from "@/lib/maplibre-setup";
 import type { Hotspot, WasteReport } from "@/lib/mock-data";
 
 import type { LayerFilter, MapPick, Region } from "./hotspot-regions";
 import { REGIONS } from "./hotspot-regions";
 
 type GeoData = Parameters<maplibregl.GeoJSONSource["setData"]>[0];
+// MapLibre 6 types only known events; "tp-ready" is our own internal event.
+type CustomEventMap = { fire(type: string): void; once(type: string, cb: () => void): void };
 
 const AQI_COLOR = [
   "step",
@@ -60,6 +63,7 @@ export default function HotspotMap({
   // create map once
   useEffect(() => {
     if (!box.current) return;
+    configureMaplibre();
     const map = new maplibregl.Map({
       container: box.current,
       style: "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
@@ -128,7 +132,7 @@ export default function HotspotMap({
         },
       });
       readyRef.current = true;
-      map.fire("tp-ready");
+      (map as unknown as CustomEventMap).fire("tp-ready");
     });
 
     const clickAir = (e: maplibregl.MapLayerMouseEvent) => {
@@ -164,7 +168,7 @@ export default function HotspotMap({
     const m = mapRef.current;
     if (!m) return;
     if (readyRef.current) fn(m);
-    else m.once("tp-ready", () => fn(m));
+    else (m as unknown as CustomEventMap).once("tp-ready", () => fn(m));
   };
 
   // data

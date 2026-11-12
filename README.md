@@ -1,62 +1,88 @@
-# TerraPulse AI — Intelligence for a Living Planet
+ <div align="center">
 
-An environmental intelligence interface: an immersive, scroll-driven 3D Earth, air-quality views, forecasting interfaces and community reporting.
+# 🌍 TerraPulse AI
 
-> **Data status:** this build runs on bundled sample data. Environmental measurements and predictions shown in the app are illustrative until live data integration is implemented. No machine-learning model ships with this repository.
+### Intelligence for a Living Planet.
+
+An environmental intelligence platform combining environmental monitoring, geospatial analytics and AI-powered forecasting.
+
+[**Live Demo**](https://vijaypn87-terrapulse-ai.terrapulseai.workers.dev/) · [**GitHub Repository**](https://github.com/Vijaypn87/TerraPulse-AI)
+
+<br/>
+
+![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![TanStack Start](https://img.shields.io/badge/TanStack_Start-FF4154?style=for-the-badge&logo=reactquery&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Three.js](https://img.shields.io/badge/Three.js-3D-black?style=for-the-badge&logo=threedotjs)
+![MapLibre](https://img.shields.io/badge/MapLibre_GL-6-396CB2?style=for-the-badge)
+![Cloudflare](https://img.shields.io/badge/Cloudflare-Workers-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)
+
+</div>
+
+---
+
+## About
+
+TerraPulse AI aims to make environmental data more accessible and actionable by helping people explore environmental conditions, identify pollution hotspots, understand trends and predict potential changes.
 
 ## Features
 
-- **Environmental overview** — AQI, PM2.5 (converted from AQI using EPA breakpoints), cleanliness, noise and trend charts.
-- **Forecast interface** — 24h / 72h horizons with historical-vs-projected curves. Without a connected model the curve is an illustrative projection, not an ML prediction.
-- **Live map** — MapLibre GL map with hotspot layers and place search (OpenStreetMap Nominatim). Searching a place shows its location only; no readings are generated.
-- **Cinematic 3D Earth** — one persistent React Three Fiber scene driven by scroll (Lenis + framer-motion), with drag-to-rotate on the Live Earth section. It falls back to a static image without WebGL and respects `prefers-reduced-motion`.
-- **Community** — report feed, cleanup events, alerts and profile pages.
-- Light and dark themes.
+- 🌎 Interactive 3D Earth visualization
+- 📊 Environmental dashboards and analytics
+- 🗺️ Interactive maps and location search
+- 📈 Forecast and insights interface
+- 🔔 Environmental alerts
+- 🤝 Community reporting
+- 🌓 Responsive design with dark and light themes
 
-## Tech stack
+## Tech Stack
 
-TanStack Start (React 19, SSR) · TanStack Query · TypeScript · Vite 8 · Tailwind CSS v4 · React Three Fiber / Three.js · MapLibre GL · Recharts · Framer Motion · Nitro (Cloudflare target).
+| Area | Technologies |
+|---|---|
+| Frontend | React, TypeScript, TanStack Start |
+| Styling | Tailwind CSS, Radix UI |
+| 3D Visualization | Three.js, React Three Fiber |
+| Mapping | MapLibre GL |
+| Charts | Recharts |
+| Animation | Framer Motion, Lenis |
+| Deployment | Nitro, Cloudflare Workers |
 
-The Vite configuration uses the `@lovable.dev/vite-tanstack-config` preset, which bundles the TanStack Start, React, Tailwind, path-alias and Nitro plugins. It is a build dependency only; the project has no runtime dependency on any hosted service.
+## What's Next?
 
-## Getting started
+- [ ] Integrate reliable environmental data sources
+- [ ] Build backend services and data pipelines
+- [ ] Develop AI/ML environmental forecasting models
+- [ ] Implement pollution trend and anomaly detection
+- [ ] Build data-driven alerts and geospatial insights
 
-Requirements: Node.js 20.19+ (or 22.12+) and npm.
+**Planned backend:** Python, FastAPI and database services.
+
+**Planned AI/ML:** Environmental forecasting, trend analysis and anomaly detection.
+
+## Getting Started
 
 ```bash
-git clone <your-repository-url>
-cd <repository-folder>
-npm install
+git clone https://github.com/Vijaypn87/TerraPulse-AI.git
+cd TerraPulse-AI
+npm ci
 npm run dev
 ```
 
-Vite prints the local URL.
+## Roadmap
 
-### Scripts
+- [x] Frontend foundation
+- [x] Interactive 3D Earth and dashboards
+- [ ] Environmental data integration
+- [ ] Backend development
+- [ ] AI/ML forecasting
+- [ ] Advanced geospatial intelligence
 
-| Command           | Purpose                                                     |
-| ----------------- | ----------------------------------------------------------- |
-| `npm run dev`     | Start the development server                                |
-| `npm run build`   | Production build into `.output/` (Nitro, Cloudflare target) |
-| `npm run preview` | Preview the production build                                |
-| `npm run lint`    | ESLint                                                      |
-| `npm run format`  | Prettier                                                    |
+---
 
-## Data sources and configuration
+<div align="center">
 
-By default no backend is configured and the app uses the sample data in `src/lib/mock-data.ts`.
+**Built with curiosity, code and a vision for a better planet. 🌱**
 
-To point the app at a backend, set `VITE_API_BASE_URL` (for example in a local `.env` file, which is git-ignored). Endpoints are listed in `src/lib/api.ts`; the forecast contract is in `src/lib/forecast.ts`. When a configured backend cannot be reached, the app shows an "unavailable" state instead of substituting sample data. A forecast is labelled "ML prediction" only when the backend returns `source: "model"`.
-
-## Deployment (Cloudflare)
-
-```bash
-npm run build
-npx nitro deploy --prebuilt
-```
-
-The build writes a Cloudflare Worker with static assets to `.output/`. Authenticate with Wrangler (`npx wrangler login`) first. Set `VITE_API_BASE_URL` at build time if you use a backend.
-
-## License
-
-MIT. Add a `LICENSE` file with your copyright notice before publishing.
+</div>
